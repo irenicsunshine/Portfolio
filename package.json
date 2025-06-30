@@ -1,0 +1,28 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "enhance": "node enhance.js",
+    "build": "npm run enhance"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irenicsunshine/Portfolio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/irenicsunshine/Portfolio/issues"
+  },
+  "homepage": "https://github.com/irenicsunshine/Portfolio#readme",
+  "dependencies": {
+    "dotenv": "^17.0.0",
+    "jsdom": "^26.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}
