@@ -7,6 +7,331 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Yash Kumar Dubey - AI & ML Developer</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        
+        <!--  Skill Animation Styles -->
+        <style>
+            /* Skill Animation Overlay */
+            .skill-animation-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+    
+            .skill-animation-overlay.active {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+            }
+    
+            .skill-animation-container {
+                position: relative;
+                width: 400px;
+                height: 400px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            /* Skill Items Clickable */
+            .skill-item {
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+    
+            .skill-item:hover {
+                transform: scale(1.1);
+                box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+                background: linear-gradient(45deg, #007bff, #28a745);
+                color: white;
+            }
+    
+            .skill-item:active {
+                transform: scale(0.95);
+            }
+    
+            /* Programming Animation */
+            .coding-animation {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: linear-gradient(45deg, #1e3c72, #2a5298);
+                border-radius: 20px;
+                overflow: hidden;
+            }
+    
+            .code-rain {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0.7;
+            }
+    
+            .code-line {
+                position: absolute;
+                font-family: 'Courier New', monospace;
+                font-size: 14px;
+                color: #00ff00;
+                white-space: nowrap;
+                animation: codeRain 3s linear infinite;
+            }
+    
+            @keyframes codeRain {
+                0% { transform: translateY(-100px); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translateY(400px); opacity: 0; }
+            }
+    
+            /* AI/ML Animation */
+            .ai-animation {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: radial-gradient(circle, #667eea 0%, #764ba2 100%);
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .neural-network {
+                position: relative;
+                width: 300px;
+                height: 300px;
+            }
+    
+            .neuron {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background: #fff;
+                border-radius: 50%;
+                animation: pulse 2s ease-in-out infinite;
+            }
+    
+            .connection {
+                position: absolute;
+                height: 2px;
+                background: linear-gradient(90deg, #fff, transparent);
+                animation: dataFlow 1.5s linear infinite;
+            }
+    
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); opacity: 0.7; }
+                50% { transform: scale(1.3); opacity: 1; }
+            }
+    
+            @keyframes dataFlow {
+                0% { opacity: 0; transform: scaleX(0); }
+                50% { opacity: 1; transform: scaleX(1); }
+                100% { opacity: 0; transform: scaleX(0); }
+            }
+    
+            /* Database Animation */
+            .database-animation {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .data-visualization {
+                position: relative;
+                width: 200px;
+                height: 200px;
+            }
+    
+            .data-bar {
+                position: absolute;
+                bottom: 0;
+                width: 30px;
+                background: linear-gradient(180deg, #00ff88, #00ccff);
+                border-radius: 5px 5px 0 0;
+                animation: dataGrow 2s ease-in-out infinite;
+            }
+    
+            @keyframes dataGrow {
+                0%, 100% { height: 20px; }
+                50% { height: 120px; }
+            }
+    
+            /* Web Development Animation */
+            .web-animation {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .browser-window {
+                width: 250px;
+                height: 180px;
+                background: #fff;
+                border-radius: 10px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            }
+    
+            .browser-header {
+                height: 30px;
+                background: #f0f0f0;
+                display: flex;
+                align-items: center;
+                padding: 0 10px;
+            }
+    
+            .browser-dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+    
+            .dot-red { background: #ff5f57; }
+            .dot-yellow { background: #ffbd2e; }
+            .dot-green { background: #28ca42; }
+    
+            .browser-content {
+                padding: 20px;
+                height: calc(100% - 30px);
+                position: relative;
+            }
+    
+            .html-element {
+                position: absolute;
+                background: rgba(0, 123, 255, 0.2);
+                border: 2px solid #007bff;
+                animation: buildWebsite 2s ease-in-out infinite;
+            }
+    
+            @keyframes buildWebsite {
+                0% { opacity: 0; transform: scale(0); }
+                50% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0.7; transform: scale(1); }
+            }
+    
+            /* Cloud/DevOps Animation */
+            .cloud-animation {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                background: linear-gradient(135deg, #74b9ff, #0984e3);
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+    
+            .cloud {
+                position: relative;
+                width: 100px;
+                height: 40px;
+                background: #fff;
+                border-radius: 40px;
+                animation: float 3s ease-in-out infinite;
+            }
+    
+            .cloud::before,
+            .cloud::after {
+                content: '';
+                position: absolute;
+                background: #fff;
+                border-radius: 50%;
+            }
+    
+            .cloud::before {
+                width: 50px;
+                height: 50px;
+                top: -25px;
+                left: 10px;
+            }
+    
+            .cloud::after {
+                width: 60px;
+                height: 40px;
+                top: -15px;
+                right: 15px;
+            }
+    
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+    
+            /* Close Button */
+            .animation-close {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid #fff;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                font-size: 20px;
+                color: #fff;
+                transition: all 0.3s ease;
+            }
+    
+            .animation-close:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(1.1);
+            }
+    
+            /* Skill Title in Animation */
+            .animation-title {
+                position: absolute;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #fff;
+                font-size: 24px;
+                font-weight: bold;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            }
+        </style>
+    </head>
+    
+    <script src="enhance.js"></script>
 </head>
 <body>
     <header>
@@ -196,6 +521,375 @@
     </footer>
 
     <script src="js/script.js"></script>
+
+
+        <!-- Your existing content -->
+    
+    <!-- ADD THIS: Skill Animation JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Existing smooth scrolling code...
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Existing fade-in effects...
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.opacity = 0;
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(section);
+            });
+
+            // ================== SKILL ANIMATIONS ==================
+            
+            // Create overlay element
+            const overlay = document.createElement('div');
+            overlay.className = 'skill-animation-overlay';
+            document.body.appendChild(overlay);
+
+            // Skill categories and their animations
+            const skillAnimations = {
+                'programming': ['Python', 'JavaScript', 'TypeScript', 'C++', 'Java'],
+                'ai': ['TensorFlow', 'PyTorch', 'Scikit-learn', 'AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Computer Vision', 'Transformers', 'GAN', 'RAG'],
+                'database': ['MongoDB', 'PostgreSQL', 'MySQL', 'SQL', 'Redis'],
+                'web': ['React', 'Next.js', 'Vue.js', 'Angular', 'HTML', 'CSS', 'Express', 'Node.js'],
+                'cloud': ['Docker', 'AWS', 'Kubernetes', 'Google Cloud', 'Azure']
+            };
+
+            // Animation generators
+            const animations = {
+                programming: (skillName) => createCodingAnimation(skillName),
+                ai: (skillName) => createAIAnimation(skillName),
+                database: (skillName) => createDatabaseAnimation(skillName),
+                web: (skillName) => createWebAnimation(skillName),
+                cloud: (skillName) => createCloudAnimation(skillName)
+            };
+
+            // Function to determine skill category
+            function getSkillCategory(skillName) {
+                for (const [category, skills] of Object.entries(skillAnimations)) {
+                    if (skills.includes(skillName)) {
+                        return category;
+                    }
+                }
+                return 'programming'; // default
+            }
+
+            // Add click listeners to all skill items
+            function addSkillClickListeners() {
+                const skillItems = document.querySelectorAll('.skill-item');
+                skillItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const skillText = item.textContent.trim();
+                        const skillName = skillText.replace(/^\S+\s/, ''); // Remove icon
+                        showSkillAnimation(skillName);
+                    });
+                });
+            }
+
+            // Show skill animation
+            function showSkillAnimation(skillName) {
+                const category = getSkillCategory(skillName);
+                const animationElement = animations[category](skillName);
+                
+                overlay.innerHTML = '';
+                overlay.appendChild(animationElement);
+                overlay.classList.add('active');
+                
+                // Close on click outside or close button
+                overlay.addEventListener('click', (e) => {
+                    if (e.target === overlay || e.target.classList.contains('animation-close')) {
+                        hideSkillAnimation();
+                    }
+                });
+
+                // Close on escape key
+                const handleEscape = (e) => {
+                    if (e.key === 'Escape') {
+                        hideSkillAnimation();
+                        document.removeEventListener('keydown', handleEscape);
+                    }
+                };
+                document.addEventListener('keydown', handleEscape);
+            }
+
+            // Hide skill animation
+            function hideSkillAnimation() {
+                overlay.classList.remove('active');
+            }
+
+            // Animation creators
+            function createCodingAnimation(skillName) {
+                const container = document.createElement('div');
+                container.className = 'skill-animation-container';
+                
+                const codeSnippets = {
+                    'Python': ['def hello_world():', '    print("Hello, World!")', 'import numpy as np', 'for i in range(10):'],
+                    'JavaScript': ['function hello() {', '  console.log("Hello!");', '}', 'const arr = [1, 2, 3];'],
+                    'TypeScript': ['interface User {', '  name: string;', '}', 'const user: User = {'],
+                    'C++': ['#include <iostream>', 'int main() {', '  return 0;', '}'],
+                    'Java': ['public class Main {', '  public static void main', '  System.out.println();', '}']
+                };
+
+                const animationDiv = document.createElement('div');
+                animationDiv.className = 'coding-animation';
+                
+                const codeRain = document.createElement('div');
+                codeRain.className = 'code-rain';
+                
+                const codes = codeSnippets[skillName] || codeSnippets['Python'];
+                
+                // Create falling code lines
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const codeLine = document.createElement('div');
+                        codeLine.className = 'code-line';
+                        codeLine.textContent = codes[Math.floor(Math.random() * codes.length)];
+                        codeLine.style.left = Math.random() * 350 + 'px';
+                        codeLine.style.animationDelay = Math.random() * 2 + 's';
+                        codeRain.appendChild(codeLine);
+                        
+                        setTimeout(() => codeLine.remove(), 3000);
+                    }, i * 150);
+                }
+                
+                animationDiv.appendChild(codeRain);
+                
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'animation-close';
+                closeBtn.innerHTML = '×';
+                
+                const title = document.createElement('div');
+                title.className = 'animation-title';
+                title.textContent = skillName;
+                
+                container.appendChild(animationDiv);
+                container.appendChild(closeBtn);
+                container.appendChild(title);
+                
+                return container;
+            }
+
+            function createAIAnimation(skillName) {
+                const container = document.createElement('div');
+                container.className = 'skill-animation-container';
+                
+                const animationDiv = document.createElement('div');
+                animationDiv.className = 'ai-animation';
+                
+                const neuralNetwork = document.createElement('div');
+                neuralNetwork.className = 'neural-network';
+                
+                // Create neurons
+                const positions = [
+                    {x: 50, y: 50}, {x: 50, y: 150}, {x: 50, y: 250},
+                    {x: 150, y: 75}, {x: 150, y: 125}, {x: 150, y: 175}, {x: 150, y: 225},
+                    {x: 250, y: 100}, {x: 250, y: 200}
+                ];
+                
+                positions.forEach((pos, index) => {
+                    const neuron = document.createElement('div');
+                    neuron.className = 'neuron';
+                    neuron.style.left = pos.x + 'px';
+                    neuron.style.top = pos.y + 'px';
+                    neuron.style.animationDelay = (index * 0.2) + 's';
+                    neuralNetwork.appendChild(neuron);
+                });
+                
+                // Create connections
+                for (let i = 0; i < 15; i++) {
+                    const connection = document.createElement('div');
+                    connection.className = 'connection';
+                    connection.style.left = Math.random() * 200 + 50 + 'px';
+                    connection.style.top = Math.random() * 200 + 50 + 'px';
+                    connection.style.width = Math.random() * 100 + 50 + 'px';
+                    connection.style.animationDelay = Math.random() * 2 + 's';
+                    neuralNetwork.appendChild(connection);
+                }
+                
+                animationDiv.appendChild(neuralNetwork);
+                
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'animation-close';
+                closeBtn.innerHTML = '×';
+                
+                const title = document.createElement('div');
+                title.className = 'animation-title';
+                title.textContent = skillName;
+                
+                container.appendChild(animationDiv);
+                container.appendChild(closeBtn);
+                container.appendChild(title);
+                
+                return container;
+            }
+
+            function createDatabaseAnimation(skillName) {
+                const container = document.createElement('div');
+                container.className = 'skill-animation-container';
+                
+                const animationDiv = document.createElement('div');
+                animationDiv.className = 'database-animation';
+                
+                const dataViz = document.createElement('div');
+                dataViz.className = 'data-visualization';
+                
+                // Create animated data bars
+                for (let i = 0; i < 8; i++) {
+                    const bar = document.createElement('div');
+                    bar.className = 'data-bar';
+                    bar.style.left = (i * 25) + 'px';
+                    bar.style.animationDelay = (i * 0.2) + 's';
+                    bar.style.background = `linear-gradient(180deg, hsl(${i * 45}, 70%, 60%), hsl(${i * 45}, 70%, 40%))`;
+                    dataViz.appendChild(bar);
+                }
+                
+                animationDiv.appendChild(dataViz);
+                
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'animation-close';
+                closeBtn.innerHTML = '×';
+                
+                const title = document.createElement('div');
+                title.className = 'animation-title';
+                title.textContent = skillName;
+                
+                container.appendChild(animationDiv);
+                container.appendChild(closeBtn);
+                container.appendChild(title);
+                
+                return container;
+            }
+
+            function createWebAnimation(skillName) {
+                const container = document.createElement('div');
+                container.className = 'skill-animation-container';
+                
+                const animationDiv = document.createElement('div');
+                animationDiv.className = 'web-animation';
+                
+                const browser = document.createElement('div');
+                browser.className = 'browser-window';
+                
+                const header = document.createElement('div');
+                header.className = 'browser-header';
+                
+                const dots = ['dot-red', 'dot-yellow', 'dot-green'];
+                dots.forEach(dotClass => {
+                    const dot = document.createElement('div');
+                    dot.className = `browser-dot ${dotClass}`;
+                    header.appendChild(dot);
+                });
+                
+                const content = document.createElement('div');
+                content.className = 'browser-content';
+                
+                // Create building elements
+                for (let i = 0; i < 6; i++) {
+                    const element = document.createElement('div');
+                    element.className = 'html-element';
+                    element.style.width = Math.random() * 80 + 20 + 'px';
+                    element.style.height = Math.random() * 20 + 10 + 'px';
+                    element.style.top = Math.random() * 100 + 'px';
+                    element.style.left = Math.random() * 150 + 'px';
+                    element.style.animationDelay = (i * 0.3) + 's';
+                    content.appendChild(element);
+                }
+                
+                browser.appendChild(header);
+                browser.appendChild(content);
+                animationDiv.appendChild(browser);
+                
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'animation-close';
+                closeBtn.innerHTML = '×';
+                
+                const title = document.createElement('div');
+                title.className = 'animation-title';
+                title.textContent = skillName;
+                
+                container.appendChild(animationDiv);
+                container.appendChild(closeBtn);
+                container.appendChild(title);
+                
+                return container;
+            }
+
+            function createCloudAnimation(skillName) {
+                const container = document.createElement('div');
+                container.className = 'skill-animation-container';
+                
+                const animationDiv = document.createElement('div');
+                animationDiv.className = 'cloud-animation';
+                
+                // Create multiple floating clouds
+                for (let i = 0; i < 5; i++) {
+                    const cloud = document.createElement('div');
+                    cloud.className = 'cloud';
+                    cloud.style.position = 'absolute';
+                    cloud.style.left = Math.random() * 250 + 'px';
+                    cloud.style.top = Math.random() * 250 + 50 + 'px';
+                    cloud.style.animationDelay = (i * 0.5) + 's';
+                    cloud.style.opacity = 0.7 + (Math.random() * 0.3);
+                    animationDiv.appendChild(cloud);
+                }
+                
+                const closeBtn = document.createElement('div');
+                closeBtn.className = 'animation-close';
+                closeBtn.innerHTML = '×';
+                
+                const title = document.createElement('div');
+                title.className = 'animation-title';
+                title.textContent = skillName;
+                
+                container.appendChild(animationDiv);
+                container.appendChild(closeBtn);
+                container.appendChild(title);
+                
+                return container;
+            }
+
+            // Initialize skill click listeners
+            addSkillClickListeners();
+
+            // Re-add listeners when skills are dynamically updated
+            const skillsObserver = new MutationObserver(() => {
+                addSkillClickListeners();
+            });
+
+            const skillsGrid = document.querySelector('.skills-grid');
+            if (skillsGrid) {
+                skillsObserver.observe(skillsGrid, { childList: true });
+            }
+        });
+    </script>
+
+    <!-- Your existing script.js reference (if you want to keep it) -->
+    <script src="js/script.js"></script>
+</body>
+</html>
+
         
 
 
