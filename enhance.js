@@ -365,7 +365,7 @@ function inferSkillsFromRepoName(repoName) {
 // ================== AI DESCRIPTION GENERATION ==================
 async function generateAIDescription(repoData) {
     // Try HF API first
-    if (HF_TOKEN && HF_TOKEN !== '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') {
+    if (HF_TOKEN && HF_TOKEN !== 'process.env.HF_TOKEN') {
         try {
             const prompt = `Write a detailed, professional, and engaging summary for a developer portfolio project.
 Project name: ${repoData.name}
