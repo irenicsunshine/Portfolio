@@ -4,9 +4,9 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
 
-// CONFIGURE THESE:
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const PORTFOLIO_HTML = 'index.html'; // Your main HTML file
+const HF_TOKEN = process.env.HF_TOKEN;
+const PORTFOLIO_HTML = 'index.html';
 const GITHUB_REPOS = [
   'irenicsunshine/Beyond-the-window',
   'irenicsunshine/Sentiment-Analysis',
@@ -65,16 +65,52 @@ function cleanReadmeSnippet(readme) {
     .replace(/[#*`>]/g, ' ')             // Remove markdown
     .replace(/\s+/g, ' ')
     .trim()
-    .substring(0, 150);
+    .substring(0, 300);
 }
 
-function enhanceDescription(repo) {
-  let desc = repo.description;
+// --- AI Description Enhancement ---
+async function aiEnhanceDescription(repo) {
+  const prompt = `Write a detailed, professional, and engaging summary for a developer portfolio project.
+Project name: ${repo.name}
+GitHub description: ${repo.description}
+Technologies: ${repo.languages.join(', ')}
+README snippet: ${cleanReadmeSnippet(repo.readme)}
+Highlight the project's purpose, features, and technical depth.`;
+
+  try {
+    const response = await fetch('https://api-inference.huggingface.co/models/microsoft/BioGPT-Large', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${HF_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ inputs: prompt, parameters: { max_new_tokens: 120 } })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HF API error: ${response.status}`);
+    }
+    const result = await response.json();
+    // The result is usually an array of objects with .generated_text or .summary_text
+    const text = Array.isArray(result)
+      ? (result[0].generated_text || result[0].summary_text || '')
+      : (result.generated_text || result.summary_text || '');
+    return text.trim() || fallbackEnhanceDescription(repo);
+  } catch (e) {
+    console.error(`HF API failed for ${repo.name}:`, e.message);
+    return fallbackEnhanceDescription(repo);
+  }
+}
+
+// Fallback if HF API fails
+function fallbackEnhanceDescription(repo) {
+  let desc = repo.description ? repo.description + ' ' : '';
   if (repo.readme) {
     const snippet = cleanReadmeSnippet(repo.readme);
-    if (snippet && !desc.includes(snippet)) desc += ' ' + snippet;
+    if (snippet && !desc.includes(snippet)) desc += snippet + ' ';
   }
-  if (repo.languages.length) desc += ` Built with ${repo.languages.slice(0, 3).join(', ')}.`;
+  if (repo.languages.length) desc += `Built with ${repo.languages.slice(0, 3).join(', ')}. `;
+  desc += `This project demonstrates expertise in ${repo.languages.join(', ')} and modern development practices.`;
   return desc.trim();
 }
 
@@ -85,7 +121,6 @@ function enhanceDescription(repo) {
   const dom = new JSDOM(html);
   const document = dom.window.document;
 
-  // For each project, enhance
   for (const repoPath of GITHUB_REPOS) {
     const repo = await fetchRepoData(repoPath);
 
@@ -96,9 +131,9 @@ function enhanceDescription(repo) {
     });
     if (!card) continue;
 
-    // Enhance description
+    // AI-enhanced description
     const descElem = card.querySelector('p');
-    if (descElem) descElem.textContent = enhanceDescription(repo);
+    if (descElem) descElem.textContent = await aiEnhanceDescription(repo);
 
     // Add stats
     let statsElem = card.querySelector('.repo-stats');
