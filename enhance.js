@@ -1,12 +1,52 @@
 // enhance.js (Node.js only, for build-time enhancement with ALL advanced features)
-require('dotenv').config();
+const path = require('path');
+const dotenv = require('dotenv');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const { JSDOM } = require('jsdom');
 
+// Load .env file with path resolution and debug info
+const envPath = path.resolve(__dirname, '.env');
+console.log('📁 Attempting to load .env file from:', envPath);
+
+try {
+    if (fs.existsSync(envPath)) {
+        console.log('✅ .env file exists');
+        const envConfig = dotenv.parse(fs.readFileSync(envPath));
+        console.log('🔑 Found environment variables:', Object.keys(envConfig).join(', '));
+        
+        // Manually set environment variables
+        for (const key in envConfig) {
+            process.env[key] = envConfig[key];
+        }
+        
+        console.log('✅ Environment variables loaded successfully');
+    } else {
+        console.warn('⚠️  .env file not found at:', envPath);
+    }
+} catch (error) {
+    console.error('❌ Error loading .env file:', error.message);
+}
+
+// Debug environment variables
+console.log('🔍 Current environment variables:', 
+    Object.keys(process.env)
+        .filter(key => key.includes('TOKEN') || key === 'NODE_ENV')
+        .map(key => `${key}=${key.endsWith('TOKEN') ? '***' + (process.env[key] || '').slice(-4) : process.env[key]}`)
+);
+
+// Verify HF_TOKEN
+if (!process.env.HF_TOKEN) {
+    console.error('❌ HF_TOKEN is not set in environment variables');
+} else if (!process.env.HF_TOKEN.startsWith('hf_')) {
+    console.error('❌ HF_TOKEN does not start with "hf_"');
+} else {
+    console.log('✅ HF_TOKEN is properly set');
+}
+
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const HF_TOKEN = process.env.HF_TOKEN;
-const PORTFOLIO_VERSION = '1.0.2'; // Increment to refresh cache
+const PORTFOLIO_VERSION = '1.0.4'; // Increment to refresh cache
 const PORTFOLIO_HTML = 'index.html';
 const GITHUB_REPOS = [
   'irenicsunshine/Beyond-the-window',
@@ -365,7 +405,8 @@ function inferSkillsFromRepoName(repoName) {
 // ================== AI DESCRIPTION GENERATION ==================
 async function generateAIDescription(repoData) {
     // Try HF API first
-    if (HF_TOKEN && HF_TOKEN !== 'process.env.HF_TOKEN') {
+    if (HF_TOKEN && HF_TOKEN.startsWith('hf_')) {
+        console.log('Using Hugging Face API for description generation...');
         try {
             const prompt = `Write a detailed, professional, and engaging summary for a developer portfolio project.
 Project name: ${repoData.name}
