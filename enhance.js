@@ -46,10 +46,11 @@ if (!process.env.HF_TOKEN) {
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const HF_TOKEN = process.env.HF_TOKEN;
-const PORTFOLIO_VERSION = '1.0.4'; // Increment to refresh cache
+const PORTFOLIO_VERSION = '1.0.5'; // Increment to refresh cache
 const PORTFOLIO_HTML = 'index.html';
 const GITHUB_REPOS = [
   'irenicsunshine/Beyond-the-window',
+  'irenicsunshine/Sour-Grapes',
   'irenicsunshine/Sentiment-Analysis',
   'irenicsunshine/Multi-Class-Image-Classifier-using-PyTorch-CNNs',
   'irenicsunshine/Odoo',
